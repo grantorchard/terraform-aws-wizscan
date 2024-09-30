@@ -27,6 +27,7 @@ module "eks" {
     source  = "terraform-aws-modules/eks/aws"
     version = "20.24.2"
 
+    cluster_name = "brighter-tech" 
     cluster_endpoint_public_access = true
     cluster_endpoint_public_access_cidrs = [
         "192.168.17.0/24",
