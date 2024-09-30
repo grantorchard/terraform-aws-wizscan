@@ -10,11 +10,15 @@
 #   ignore_public_acls      = true
 #   restrict_public_buckets = false
 # }
+
+data "aws_availability_zones" "this" {}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.13.0"
   cidr = "10.0.0.0/16"
   private_subnets = cidrsubnets("10.0.0.0/16", 8, 8, 8)
+  azs = data.aws_availability_zones.this.ids
 }
 
 module "eks" {
