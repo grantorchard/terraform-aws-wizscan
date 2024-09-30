@@ -10,6 +10,10 @@
 #   ignore_public_acls      = true
 #   restrict_public_buckets = false
 # }
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "5.13.0"
+}
 
 module "eks" {
     source  = "terraform-aws-modules/eks/aws"
@@ -19,6 +23,12 @@ module "eks" {
     cluster_endpoint_public_access_cidrs = [
         "192.168.17.0/24",
         "0.0.0.0/0"
+    ]
+    control_plane_subnet_ids = [
+      module.vpc.private_subnets
+    ]
+    subnet_ids = [
+      module.vpc.subnet_ids
     ]
 }
 
