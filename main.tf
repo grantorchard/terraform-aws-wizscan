@@ -24,9 +24,8 @@ module "eks" {
         "192.168.17.0/24",
         "0.0.0.0/0"
     ]
-    control_plane_subnet_ids = [
-      module.vpc.private_subnets
-    ]
+    vpc_id     = module.vpc.vpc_id
+    subnet_ids = module.vpc.private_subnets
 }
 
 
